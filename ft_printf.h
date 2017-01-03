@@ -5,9 +5,18 @@
 # include <stdarg.h>
 #include <stdio.h>///////////
 
+typedef struct	s_flags
+{
+	int			left_justify;
+	int			show_sign;
+	int			show_space;
+	int			hash;
+	int			fill_zeroes;
+}				t_flags;
+
 typedef struct	s_mods
 {
-	int			flags[5];
+	t_flags		flags;
 	int			width;
 	int			precision;
 	int			length; // not sure if this is correct

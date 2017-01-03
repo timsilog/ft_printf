@@ -21,16 +21,16 @@ int		handle_flags(const char *str, t_mods *mods)
 		|| str[i] == '#' || str[i] == '0')
 	{
 		if (str[i] == '-')
-			mods->flags[0]++; // left justify (uses width)
+			mods->flags.left_justify++; // left justify (uses width)
 		else if (str[i] == '+')
-			mods->flags[1]++; // show sign
+			mods->flags.show_sign++; // show sign
 		else if (str[i] == ' ')
-			mods->flags[2]++; // show space if no sign
+			mods->flags.show_space++; // show space if no sign
 		else if (str[i] == '#')
-			mods->flags[3]++; /* precede o, x, X with 0, 0x, 0X
+			mods->flags.hash++; /* precede o, x, X with 0, 0x, 0X
 								force e, E, f, F to contain decimal */
 		else if (str[i] == '0')
-			mods->flags[4]++; // fills leftover width with zeroes
+			mods->flags.fill_zeroes++; // fills leftover width with zeroes
 		i++;
 	}
 	return (i);
@@ -38,11 +38,11 @@ int		handle_flags(const char *str, t_mods *mods)
 
 void	init_mods(t_mods *mods)
 {
-	int i;
-
-	i = -1;
-	while (++i < 5)
-		mods->flags[i] = 0;
+	(mods->flags).left_justify = 0;
+	mods->flags.show_sign = 0;
+	mods->flags.show_space = 0;
+	mods->flags.hash = 0;
+	mods->flags.fill_zeroes = 0;
 	mods->width = 0;
 	mods->precision = 0;
 	mods->length = 0;
@@ -84,6 +84,6 @@ int		ft_printf(const char *format, ...)
 		else
 			write(1, &format[i++], 1);
 	}
-	printf("\nflags[0] = %d\nflags[1] = %d\nflags[2] = %d\nflags[3] = %d\nflags[4] = %d\nwidth = %d\nprecision = %d\n",mods.flags[0],mods.flags[1],mods.flags[2],mods.flags[3],mods.flags[4],mods.width,mods.precision);
+	printf("\nflags.left_justify = %d\nflags.show_sign = %d\nflags.show_space = %d\nflags.hash = %d\nflags.fill_zeroes = %d\nwidth = %d\nprecision = %d\n",mods.flags.left_justify,mods.flags.show_sign,mods.flags.show_space,mods.flags.hash,mods.flags.fill_zeroes,mods.width,mods.precision);
 	return (0);//return num char printed
 }
