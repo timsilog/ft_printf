@@ -5,6 +5,16 @@
 # include <stdarg.h>
 #include <stdio.h>///////////
 
+typedef enum
+{
+	hh,
+	h,
+	l,
+	ll,
+	j,
+	z
+}				conversion;
+
 typedef struct	s_flags
 {
 	int			left_justify;
@@ -19,7 +29,7 @@ typedef struct	s_mods
 	t_flags		flags;
 	int			width;
 	int			precision;
-	int			length; // not sure if this is correct
+	conversion	length; // not sure if this is correct
 	char		*specifier; // not sure on this either
 }				t_mods;
 
@@ -28,5 +38,6 @@ int				handle_width(const char *str,
 t_mods *mods, va_list tags);
 int				handle_precision(const char *str,
 t_mods *mods, va_list tags);
+int				handle_length(const char *str, t_mods *mods);
 int				is_num(char c);
 #endif

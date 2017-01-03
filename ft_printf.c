@@ -38,7 +38,7 @@ int		handle_flags(const char *str, t_mods *mods)
 
 void	init_mods(t_mods *mods)
 {
-	(mods->flags).left_justify = 0;
+	mods->flags.left_justify = 0;
 	mods->flags.show_sign = 0;
 	mods->flags.show_space = 0;
 	mods->flags.hash = 0;
@@ -53,6 +53,7 @@ int		ft_printf(const char *format, ...)
 	va_list	tags;
 	int		i;
 	int		j;
+	int		count;
 	t_mods	mods;
 	
 	if (!format) // format[0]?
@@ -60,6 +61,7 @@ int		ft_printf(const char *format, ...)
 	init_mods(&mods);
 	va_start(tags, format);
 	i = 0;
+	count = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -77,13 +79,18 @@ int		ft_printf(const char *format, ...)
 				i += j;
 	
 		// handle length
+			if ((j = handle_length(&format[i], &mods)))
+				i += j;
 	
 		// handle specifier
 			//handle_specifer(format[i], flags);
 		}
 		else
+		{
 			write(1, &format[i++], 1);
+			count++;
+		}
 	}
-	printf("\nflags.left_justify = %d\nflags.show_sign = %d\nflags.show_space = %d\nflags.hash = %d\nflags.fill_zeroes = %d\nwidth = %d\nprecision = %d\n",mods.flags.left_justify,mods.flags.show_sign,mods.flags.show_space,mods.flags.hash,mods.flags.fill_zeroes,mods.width,mods.precision);
+	printf("\nflags.left_justify = %d\nflags.show_sign = %d\nflags.show_space = %d\nflags.hash = %d\nflags.fill_zeroes = %d\nwidth = %d\nprecision = %d\nlength = %d of {hh, h, l, ll, j, z}\n",mods.flags.left_justify,mods.flags.show_sign,mods.flags.show_space,mods.flags.hash,mods.flags.fill_zeroes,mods.width,mods.precision, mods.length);
 	return (0);//return num char printed
 }

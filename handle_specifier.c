@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	handle_specifier(char c, va_list tags)
+int		handle_specifier(char c, va_list tags)
 {
 	if (c == 'd' || c == 'i')
 		handle_decimal(flags);
