@@ -12,29 +12,6 @@
 
 #include "ft_printf.h"
 
-int		handle_flags(const char *str, t_mods *mods)
-{
-	int i;
-
-	i = 0;
-	while (str[i] == '-' || str[i] == '+' || str[i] == ' '
-		|| str[i] == '#' || str[i] == '0')
-	{
-		if (str[i] == '-')
-			mods->flags.left_justify++; // left justify (uses width)
-		else if (str[i] == '+')
-			mods->flags.show_sign++; // show sign
-		else if (str[i] == ' ')
-			mods->flags.show_space++; // show space if no sign
-		else if (str[i] == '#')
-			mods->flags.hash++; /* precede o, x, X with 0, 0x, 0X
-								force e, E, f, F to contain decimal */
-		else if (str[i] == '0')
-			mods->flags.fill_zeroes++; // fills leftover width with zeroes
-		i++;
-	}
-	return (i);
-}
 
 void	init_mods(t_mods *mods)
 {
@@ -48,34 +25,32 @@ void	init_mods(t_mods *mods)
 	mods->length = 0;
 }
 
-int		ft_printf(const char *format, ...)
+int		print_string(const char *format, int count, t_mods mods)
 {
-	va_list	tags;
-	int		i;
-	int		j;
-	int		count;
-	t_mods	mods;
-	
-	if (!format) // format[0]?
-		return (0);
-	init_mods(&mods);
-	va_start(tags, format);
+	int i;
+	int j;
+
 	i = 0;
-	count = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-		// handle flags
-			if ((j = handle_flags(&format[++i], &mods)))
+		// handle flags. bonus: * $ L '
+			if ((j = handle_flags(&format[++i], &mods)) < 0)
+				return (-1);
+			else
 				i += j;
 	
 		// handle width
-			if ((j = handle_width(&format[i], &mods, tags)))
+			if ((j = handle_width(&format[i], &mods, tags)) < 0)
+				return (-1);
+			else
 				i += j;
 	
 		// handle .precision
-			if ((j = handle_precision(&format[i], &mods, tags)))
+			if ((j = handle_precision(&format[i], &mods, tags)) < 0)
+				return (-1);
+			else
 				i += j;
 	
 		// handle length
@@ -91,6 +66,24 @@ int		ft_printf(const char *format, ...)
 			count++;
 		}
 	}
+}
+
+int		ft_printf(const char *format, ...)
+{
+	va_list	tags;
+	int		i;
+	int		j;
+	int		count;
+	t_mods	mods;
+	
+	if (!format) // format[0]?
+		return (0);
+	init_mods(&mods);
+	va_start(tags, format);
+	count = 0;
+	if (!(count = print_string(format, count, mods)))
+		return (-1);
+
 	printf("\nflags.left_justify = %d\nflags.show_sign = %d\nflags.show_space = %d\nflags.hash = %d\nflags.fill_zeroes = %d\nwidth = %d\nprecision = %d\nlength = %d of {hh, h, l, ll, j, z}\n",mods.flags.left_justify,mods.flags.show_sign,mods.flags.show_space,mods.flags.hash,mods.flags.fill_zeroes,mods.width,mods.precision, mods.length);
-	return (0);//return num char printed
+	return (count);//return num char printed
 }

@@ -12,22 +12,24 @@
 
 #include "ft_printf.h"
 
-int		handle_specifier(char c, va_list tags)
+int		handle_specifier(char c, va_list tags, t_mods *mods)
 {
+	if (c == 'D' || c == 'C' || c == 'O' ||
+		c == 'U' || c == 'S')
+	{
+		mods->length = l;
+		c += 32;
+	}
 	if (c == 'd' || c == 'i')
-		handle_decimal(flags);
+		handle_decimal(tags, mods);
 	/*
-	if (c == 'D')
 	if (c == 'c')
-	if (c == 'C')
 	if (c == 's')
-	if (c == 'S')
 	if (c == 'p')
-	if (c == 'o')
-	if (c == 'O')
+	if (c == 'o') // octal
 	if (c == 'u')
-	if (c == 'U')
-	if (c == 'x')
-	if (c == 'X')
+	if (c == 'x' || c == 'X') //  hex lower||upper
 	*/
+
+	// bonus: eE fF gG aA n
 }

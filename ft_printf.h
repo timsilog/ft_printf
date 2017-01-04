@@ -34,6 +34,7 @@ typedef struct	s_mods
 }				t_mods;
 
 int				ft_printf(const char *format, ...);
+int				handle_flags(const char *str, t_mods *mods);
 int				handle_width(const char *str,
 t_mods *mods, va_list tags);
 int				handle_precision(const char *str,
