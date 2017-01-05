@@ -40,5 +40,7 @@ t_mods *mods, va_list tags);
 int				handle_precision(const char *str,
 t_mods *mods, va_list tags);
 int				handle_length(const char *str, t_mods *mods);
+int				handle_specifier(char c, va_list tags, t_mods *mods);
+int				handle_decimal(va_list tags, t_mods *mods);
 int				is_num(char c);
 #endif

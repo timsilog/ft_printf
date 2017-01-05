@@ -1,16 +1,18 @@
-
-#include "ft_printf.c"
+// commented out ft_putstr
+#include "ft_printf.h"
 
 int		check_flag_errors(t_mods *mods, int chars_read)
 {
 	if (mods->flags.left_justify && mods->flags.fill_zeroes)
 	{
-		ft_putstr("'0' flag ignored with '-' flag.\n");
+		//ft_putstr("'0' flag ignored with '-' flag.\n");
+		printf("'0' flag ignored with '-' flag.\n");
 		return (-1);
 	}
 	if (mods->flags.show_sign && mods->flags.show_space)
 	{
-		ft_putstr("' ' flag ignored with '+' flag.\n");
+		//ft_putstr("' ' flag ignored with '+' flag.\n");
+		printf("'0' flag ignored with '-' flags.\n");
 		return (-1);
 	}
 	return (chars_read);

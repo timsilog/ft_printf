@@ -32,5 +32,5 @@ int main()
 {
 	//printf("%d\n%d", fun(4,1,2,3,4), fun(3,2,5,8));
 	//int i = (short)12345678;
-	printf("%%4534");
+	printf("%d asd");
 }

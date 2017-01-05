@@ -25,7 +25,8 @@ void	init_mods(t_mods *mods)
 	mods->length = 0;
 }
 
-int		print_string(const char *format, int count, t_mods mods)
+int		print_string(const char *format, int count,
+t_mods mods, va_list tags)
 {
 	int i;
 	int j;
@@ -34,10 +35,18 @@ int		print_string(const char *format, int count, t_mods mods)
 	while (format[i])
 	{
 		if (format[i] == '%')
-		{
+		{ 
+			/* j will be the number of characters read in order
+			 * to increment i by that amount. if j is ever -1 
+			 * then we return due to an error 
+			 */
+
 		// handle flags. bonus: * $ L '
 			if ((j = handle_flags(&format[++i], &mods)) < 0)
+			{
+				printf("%d", j);
 				return (-1);
+			}
 			else
 				i += j;
 	
@@ -58,7 +67,8 @@ int		print_string(const char *format, int count, t_mods mods)
 				i += j;
 	
 		// handle specifier
-			//handle_specifer(format[i], flags);
+			if ((handle_specifer(format[i], flags)) < 0)
+				return (-1);
 		}
 		else
 		{
@@ -66,13 +76,13 @@ int		print_string(const char *format, int count, t_mods mods)
 			count++;
 		}
 	}
+	printf("\nflags.left_justify = %d\nflags.show_sign = %d\nflags.show_space = %d\nflags.hash = %d\nflags.fill_zeroes = %d\nwidth = %d\nprecision = %d\nlength = %d of {hh, h, l, ll, j, z}\n",mods.flags.left_justify,mods.flags.show_sign,mods.flags.show_space,mods.flags.hash,mods.flags.fill_zeroes,mods.width,mods.precision, mods.length);
+	return (count);
 }
 
 int		ft_printf(const char *format, ...)
 {
 	va_list	tags;
-	int		i;
-	int		j;
 	int		count;
 	t_mods	mods;
 	
@@ -81,9 +91,9 @@ int		ft_printf(const char *format, ...)
 	init_mods(&mods);
 	va_start(tags, format);
 	count = 0;
-	if (!(count = print_string(format, count, mods)))
+	if (!(count = print_string(format, count, mods, tags)))
 		return (-1);
 
-	printf("\nflags.left_justify = %d\nflags.show_sign = %d\nflags.show_space = %d\nflags.hash = %d\nflags.fill_zeroes = %d\nwidth = %d\nprecision = %d\nlength = %d of {hh, h, l, ll, j, z}\n",mods.flags.left_justify,mods.flags.show_sign,mods.flags.show_space,mods.flags.hash,mods.flags.fill_zeroes,mods.width,mods.precision, mods.length);
+
 	return (count);//return num char printed
 }

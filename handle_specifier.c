@@ -21,7 +21,7 @@ int		handle_specifier(char c, va_list tags, t_mods *mods)
 		c += 32;
 	}
 	if (c == 'd' || c == 'i')
-		handle_decimal(tags, mods);
+		return (handle_decimal(tags, mods));
 	/*
 	if (c == 'c')
 	if (c == 's')
@@ -32,4 +32,5 @@ int		handle_specifier(char c, va_list tags, t_mods *mods)
 	*/
 
 	// bonus: eE fF gG aA n
+	return (1); //check if this is right
 }

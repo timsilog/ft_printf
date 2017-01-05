@@ -2,6 +2,6 @@
 
 int main()
 {
-	ft_printf("test%+- #0*.*llhello\n", 42, 53);
+	ft_printf("test%+-#*.llhello\n");
 	return (0);
 }
