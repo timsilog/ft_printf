@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/06 15:06:45 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/10 17:00:08 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,32 @@ t_mods mods, va_list tags)
 			 * to increment i by that amount. if j is ever -1 
 			 * then we return due to an error 
 			 */
-
 		// handle flags. bonus: * $ L '
 			if ((j = handle_flags(&format[++i], &mods)) < 0)
-			{
-				printf("%d", j);
 				return (-1);
-			}
 			else
 				i += j;
-	
 		// handle width
 			if ((j = handle_width(&format[i], &mods, tags)) < 0)
 				return (-1);
 			else
 				i += j;
-	
 		// handle .precision
 			if ((j = handle_precision(&format[i], &mods, tags)) < 0)
 				return (-1);
 			else
 				i += j;
-	
 		// handle length
 			if ((j = handle_length(&format[i], &mods)))
 				i += j;
-	
 		// handle specifier
-			if ((handle_specifer(format[i], flags)) < 0)
+			if ((j = handle_specifier(format[i], tags, &mods)) < 0)
 				return (-1);
+			else
+			{
+				count += j;
+				i++;
+			}
 		}
 		else
 		{
@@ -76,7 +73,9 @@ t_mods mods, va_list tags)
 			count++;
 		}
 	}
-	printf("\nflags.left_justify = %d\nflags.show_sign = %d\nflags.show_space = %d\nflags.hash = %d\nflags.fill_zeroes = %d\nwidth = %d\nprecision = %d\nlength = %d of {hh, h, l, ll, j, z}\n",mods.flags.left_justify,mods.flags.show_sign,mods.flags.show_space,mods.flags.hash,mods.flags.fill_zeroes,mods.width,mods.precision, mods.length);
+	////////////////////////////////////////////////////////////
+	char *a[7] = {"none", "hh", "h", "l", "ll", "j", "z"};
+	printf("\n.........................\nleft_justify = %s\t.\nshow_sign = %s\t\t.\nshow_space = %s\t\t.\nhash = %s\t\t.\nfill_zeroes = %s\t.\nwidth = %d\t\t.\nprecision = %d\t\t.\nlength = %s\t\t.\n.........................",mods.flags.left_justify ? "yes" : "no",mods.flags.show_sign?"yes":"no",mods.flags.show_space?"yes":"no",mods.flags.hash?"yes":"no",mods.flags.fill_zeroes?"yes":"no",mods.width,mods.precision, a[mods.length]);////////////////////////////////////
 	return (count);
 }
 

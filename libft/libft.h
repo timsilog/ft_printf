@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 11:06:56 by tjose             #+#    #+#             */
-/*   Updated: 2016/12/19 19:09:07 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/11 20:16:36 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdint.h>
 
 typedef struct		s_list
 {
@@ -49,7 +50,7 @@ void				*ft_memcpy(void *dst, void *src, size_t n);
 void				*ft_memccpy(void *dst, void *src, int c, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memalloc(size_t size);
-char				*ft_itoa(int n);
+char				*ft_itoa(intmax_t n);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strcat(char *dest, const char *src);
@@ -65,6 +66,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strnew(size_t size);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
+char				*ft_itoabase(intmax_t value, int base);
 char				**ft_strsplit(char const *s, char c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
@@ -84,6 +86,7 @@ int					ft_isneg(int n);
 int					ft_isprime(int nb);
 int					ft_sqrt(int nb);
 int					ft_pow(int nb, int power);
+int					ft_numlen(intmax_t n);
 size_t				ft_strlen(const char *str);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 

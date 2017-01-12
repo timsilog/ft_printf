@@ -6,11 +6,13 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 14:59:38 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/06 15:00:25 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/10 16:24:31 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_num_len(long n)
+#include "libft.h"
+
+int	ft_numlen(intmax_t n)
 {
 	int		i;
 
@@ -24,4 +26,3 @@ int	ft_num_len(long n)
 	}
 	return (i);
 }
-

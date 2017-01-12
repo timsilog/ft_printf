@@ -1,22 +1,16 @@
-// commented out ft_putstr
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_flags.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/10 16:33:38 by tjose             #+#    #+#             */
+/*   Updated: 2017/01/10 16:33:41 by tjose            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		check_flag_errors(t_mods *mods, int chars_read)
-{
-	if (mods->flags.left_justify && mods->flags.fill_zeroes)
-	{
-		//ft_putstr("'0' flag ignored with '-' flag.\n");
-		printf("'0' flag ignored with '-' flag.\n");
-		return (-1);
-	}
-	if (mods->flags.show_sign && mods->flags.show_space)
-	{
-		//ft_putstr("' ' flag ignored with '+' flag.\n");
-		printf("'0' flag ignored with '-' flags.\n");
-		return (-1);
-	}
-	return (chars_read);
-}
+#include "ft_printf.h"
 
 int		handle_flags(const char *str, t_mods *mods)
 {
@@ -39,6 +33,6 @@ int		handle_flags(const char *str, t_mods *mods)
 			mods->flags.fill_zeroes++; // fills leftover width with zeroes
 		i++;
 	}
-	return (check_flag_errors(mods, i));
+	return (i);
 }
 

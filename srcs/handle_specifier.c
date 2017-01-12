@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:43:16 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/06 14:58:17 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/11 15:25:58 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int		handle_specifier(char c, va_list tags, t_mods *mods)
 		c == 'U' || c == 'S')
 	{
 		mods->length = l;
-		c += 32;
+		c += 32; // fix this
 	}
-	if (c == 'd' || c == 'i')
-		return (handle_decimal(tags, mods));
+	if (c == 'd' || c == 'i' || c == 'o' || c == 'u' || c == 'x')
+		return (handle_number(tags, mods, c));
 	/*
-	if (c == 'c')
-	if (c == 's')
-	if (c == 'p')
+	if (c == 'c') // character
+	if (c == 's') // string
+	if (c == 'p') // address?
 	if (c == 'o') // octal
-	if (c == 'u')
+	if (c == 'u') // unsigned decimal
 	if (c == 'x' || c == 'X') //  hex lower||upper
 	*/
 

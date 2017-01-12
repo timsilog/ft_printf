@@ -6,7 +6,7 @@
 #    By: tjose <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 11:44:34 by tjose             #+#    #+#              #
-#    Updated: 2017/01/06 15:01:51 by tjose            ###   ########.fr        #
+#    Updated: 2017/01/11 20:16:12 by tjose            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ SRCS = ft_putchar.o \
 	   ft_sqrt.o \
 	   ft_pow.o \
 	   ft_lstadd_back.o \
-	   ft_numlen.o
+	   ft_numlen.o \
+	   ft_itoabase.o
 
 all: $(NAME)
 

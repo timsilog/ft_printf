@@ -6,34 +6,19 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 13:23:11 by tjose             #+#    #+#             */
-/*   Updated: 2016/12/01 17:31:22 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/11 15:38:34 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	num_len(long n)
-{
-	int		i;
-
-	i = 0;
-	if (!n)
-		return (1);
-	while (n)
-	{
-		i++;
-		n /= 10;
-	}
-	return (i);
-}
-
-static char	*get_num(char *s, long n, int flag)
+static char	*get_num(char *s, intmax_t n, int flag)
 {
 	int		i;
 	int		len;
 
 	i = 0;
-	len = num_len(n) + flag;
+	len = ft_numlen(n) + flag;
 	s[len--] = '\0';
 	while (len >= 0)
 	{
@@ -45,26 +30,24 @@ static char	*get_num(char *s, long n, int flag)
 	return (s);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(intmax_t n)
 {
-	int		neg_flag;
-	int		i;
-	char	*s;
-	long	nb;
+	int			neg_flag;
+	int			i;
+	char		*s;
 
 	i = 0;
 	neg_flag = 0;
-	nb = n;
-	if (nb < 0)
+	if (n < 0)
 	{
 		neg_flag++;
-		nb = -nb;
+		n = -n;
 	}
 	if (neg_flag)
-		s = (char*)malloc(sizeof(char) * num_len(nb) + 2);
+		s = (char*)malloc(sizeof(char) * ft_numlen(n) + 2);
 	else
-		s = (char*)malloc(sizeof(char) * num_len(nb) + 1);
+		s = (char*)malloc(sizeof(char) * ft_numlen(n) + 1);
 	if (!s)
 		return (NULL);
-	return (get_num(s, nb, neg_flag));
+	return (get_num(s, n, neg_flag));
 }
