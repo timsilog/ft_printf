@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:00:35 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/11 15:27:42 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/17 16:04:18 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <wchar.h>
 # include "../libft/libft.h"
 # include <stdio.h>///////////
 
@@ -30,12 +31,21 @@ typedef enum
 	z
 }	t_conversion;
 
+typedef enum
+{
+	no,
+	yes,
+	o,
+	x,
+	X
+}	t_hash;
+
 typedef struct		s_flags
 {
 	int				left_justify;
 	int				show_sign;
 	int				show_space;
-	int				hash;
+	t_hash			hash;
 	int				fill_zeroes;
 }					t_flags;
 
@@ -45,7 +55,7 @@ typedef struct		s_mods
 	int				width;
 	int				precision;
 	t_conversion	length;
-	char			*specifier;
+	char			specifier;
 }					t_mods;
 
 int					ft_printf(const char *format, ...);
@@ -55,6 +65,14 @@ int					handle_precision(const char *str,
 		t_mods *mods, va_list tags);
 int					handle_length(const char *str, t_mods *mods);
 int					handle_specifier(char c, va_list tags, t_mods *mods);
-int					handle_number(va_list tags, t_mods *mods, char c);
-int					is_num(char c);
+int					handle_nospec(t_mods *mods);
+int					handle_number(va_list tags, t_mods *mods);
+int					handle_char(va_list tags, t_mods *mods);
+int					handle_str(va_list tags, t_mods *mods);
+int					place_sign(t_mods *mods, char **ans, int i, char *n);
+int					place_number(t_mods *mods, char **ans, int i, char *n);
+int					get_size(char *str, t_mods *mods);
+intmax_t			convert_length(intmax_t n, t_mods *mods, char c);
+void				place_right(t_mods *mods, char **ans, int size, char *n);
+void				place_left(t_mods *mods, char **ans, int size, char *n);
 #endif

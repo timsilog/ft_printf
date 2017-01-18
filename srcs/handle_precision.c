@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:59:19 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/10 13:20:33 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 13:34:22 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 int		handle_precision(const char *str, t_mods *mods, va_list tags)
 {
-	int	i;
+	int			i;
+	static int	found;
 
 	i = 0;
 	if (str[i] == '.')
 	{
+		found = 1;
+		mods->precision = 0;
 		if (str[++i] == '*')
 		{
 			mods->precision = va_arg(tags, int);
@@ -27,7 +30,7 @@ int		handle_precision(const char *str, t_mods *mods, va_list tags)
 		while (ft_isdigit(str[i]))
 			mods->precision = mods->precision * 10 + (str[i++] - '0');
 	}
-	else
+	else if (!found)
 		mods->precision = -1;
 	return (i);
 }

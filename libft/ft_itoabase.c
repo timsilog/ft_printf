@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:08:58 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/11 20:30:13 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/12 13:58:11 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static int	numlen_base(intmax_t a, int base)
 {
 	int counter;
 
+	if (a == 0)
+		return (1);
 	counter = 0;
-	while(a)
+	while (a)
 	{
 		a /= base;
 		counter++;
@@ -27,6 +29,8 @@ static int	numlen_base(intmax_t a, int base)
 
 static char	*convert_base(char *result, intmax_t holder, int base, int length)
 {
+	if (!holder)
+		result[length] = '0';
 	while (holder)
 	{
 		if (holder % base > 9)
@@ -59,7 +63,6 @@ static char	*prep_result(intmax_t value, int length, int base)
 	return (result);
 }
 
-
 char		*ft_itoabase(intmax_t value, int base)
 {
 	char	*result;
@@ -67,10 +70,10 @@ char		*ft_itoabase(intmax_t value, int base)
 
 	if (base < 2)
 		return (NULL);
-	length = (value < 0 && base == 10) ? 0 : -1;
+	length = (value < 0 && base == 10) ? 1 : 0;
 	length += numlen_base(value, base);
 	if (!(result = prep_result(value, length, base)))
 		return (NULL);
 	value = (value < 0) ? -value : value;
-	return(convert_base(result, value, base, length));
+	return (convert_base(result, value, base, length - 1));
 }

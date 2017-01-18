@@ -6,13 +6,15 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:59:32 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/11 13:31:53 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/17 15:53:27 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
 #include <inttypes.h>
+#include <wchar.h>
+#include <stdlib.h>
 
 int fun(int cnt, ...)
 {
@@ -46,5 +48,8 @@ int main()
 {
 	//printf("%d\n%d", fun(4,1,2,3,4), fun(3,2,5,8));
 	//int i = (short)12345678;
-	printf("%o", 12123123123);
+	int a = L'ć';
+	char *b = "asdć";
+//	printf("%5.5+d(ayqweqweqw;;wlrsdfjs%d\n12345678901234567890", 123);
+	printf("'%d'\n", printf("%5"));
 }

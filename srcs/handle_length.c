@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:12:45 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/10 16:38:49 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 14:52:05 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,39 @@ static int	check_double(const char *str, t_mods *mods, int i)
 		else
 			mods->length = l;
 	}
-	return (i + 1);
+	return (i);
+}
+
+static int	is_lc(char c)
+{
+	if (c == 'h' || c == 'l' || c == 'j' || c == 'z')
+		return (1);
+	return (0);
 }
 
 int			handle_length(const char *str, t_mods *mods)
 {
-	int i;
+	int			i;
+	static int	found;
 
 	i = 0;
-	if (str[i] == 'h' || str[i] == 'l')
-		return (check_double(str, mods, i));
-	else if (str[i] == 'j')
-		mods->length = j;
-	else if (str[i] == 'z')
-		mods->length = z;
+	if (!found)
+	{
+		if (str[i] == 'h' || str[i] == 'l')
+			i = check_double(str, mods, i);
+		else if (str[i] == 'j')
+			mods->length = j;
+		else if (str[i] == 'z')
+			mods->length = z;
+		else
+			return (0);
+		found = 1;
+	}
 	else
-		return (0);
+	{
+		while (is_lc(str[i]))
+			i++;
+		i--;
+	}
 	return (i + 1);
 }

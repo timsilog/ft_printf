@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 16:33:38 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/10 16:33:41 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 15:20:18 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int		handle_flags(const char *str, t_mods *mods)
 		|| str[i] == '#' || str[i] == '0')
 	{
 		if (str[i] == '-')
-			mods->flags.left_justify++; // left justify (uses width)
+			mods->flags.left_justify = 1; // left justify (uses width)
 		else if (str[i] == '+')
-			mods->flags.show_sign++; // show sign
+			mods->flags.show_sign = 1; // show sign
 		else if (str[i] == ' ')
-			mods->flags.show_space++; // show space if no sign
+			mods->flags.show_space = 1; // show space if no sign
 		else if (str[i] == '#')
-			mods->flags.hash++; /* precede o, x, X with 0, 0x, 0X
+			mods->flags.hash = yes; /* precede o, x, X with 0, 0x, 0X
 								force e, E, f, F to contain decimal */
 		else if (str[i] == '0')
-			mods->flags.fill_zeroes++; // fills leftover width with zeroes
+			mods->flags.fill_zeroes = 1; // fills leftover width with zeroes
 		i++;
 	}
 	return (i);

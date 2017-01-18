@@ -6,7 +6,7 @@
 #    By: tjose <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/06 15:03:02 by tjose             #+#    #+#              #
-#    Updated: 2017/01/10 13:57:51 by tjose            ###   ########.fr        #
+#    Updated: 2017/01/17 16:04:30 by tjose            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,19 @@ CC = gcc
 CFLAGS = #-Wall -Werror -Wextra
 SRCS = $(addprefix $(SRCDIR), $(SRCFILES))
 SRCFILES = main.c \
-		   handle_decimal.c \
+		   handle_number.c \
+		   handle_char.c \
+		   handle_str.c \
 		   handle_flags.c \
 		   handle_length.c \
 		   handle_precision.c \
 		   handle_width.c \
 		   handle_specifier.c \
-		   ft_printf.c
+		   handle_nospec.c \
+		   ft_printf.c \
+		   place.c \
+		   convert_length.c \
+		   get_size.c
 OBJS = $(addprefix $(OBJDIR), $(SRCFILES:.c=.o))
 LIBFT = ./libft/libft.a
 LIBFTDIR = -I./libft
