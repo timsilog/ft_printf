@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:50:20 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/15 14:06:04 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 17:39:28 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int				get_size(char *str, t_mods *mods)
 		len--;
 	if (mods->specifier == 'o' && mods->flags.hash)
 		hash_adjust++;
-	if ((mods->specifier == 'x' || mods->specifier == 'X') && mods->flags.hash)
+	if ((mods->specifier == 'x' || mods->specifier == 'X' ||
+				mods->specifier == 'p') && mods->flags.hash)
 		hash_adjust += 2;
 	if (mods->width > len + hash_adjust && mods->width > mods->precision)
 		size = mods->width;

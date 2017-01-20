@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:15:06 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/13 16:21:22 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 17:36:38 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static intmax_t	convert_ulength(intmax_t n, t_mods *mods)
 
 intmax_t		convert_length(intmax_t n, t_mods *mods, char c)
 {
-	if (c == 'u' || c == 'x' || c == 'o' || c == 'X')
+	if (c == 'u' || c == 'x' || c == 'o' || c == 'X' || c == 'p')
 		return (convert_ulength(n, mods));
 	if (mods->length == hh)
 		return ((char)n);

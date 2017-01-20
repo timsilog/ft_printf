@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:59:32 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/17 15:53:27 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/19 20:19:55 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <inttypes.h>
 #include <wchar.h>
 #include <stdlib.h>
+#include <locale.h>
 
 int fun(int cnt, ...)
 {
@@ -47,9 +48,14 @@ int num_len(intmax_t n)
 int main()
 {
 	//printf("%d\n%d", fun(4,1,2,3,4), fun(3,2,5,8));
-	//int i = (short)12345678;
+	//int i = (short)12345678;a
+	
+	setlocale(LC_ALL, "");
+
+
 	int a = L'ć';
-	char *b = "asdć";
+	wchar_t c[] = L"åß∂ƒœ∑´";
+
 //	printf("%5.5+d(ayqweqweqw;;wlrsdfjs%d\n12345678901234567890", 123);
-	printf("'%d'\n", printf("%5"));
+	printf("%d ", printf("'%s'\n",c));
 }

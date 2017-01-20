@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:43:16 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/17 15:56:07 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 17:39:46 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int		handle_specifier(char c, va_list tags, t_mods *mods)
 	{
 		mods->length = l;
 		c += 32;
+	}
+	if (c == 'p')
+	{
+		mods->length = l;
+		mods->flags.hash = yes;
 	}
 	mods->specifier = c;
 	return (1);

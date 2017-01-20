@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 15:05:02 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 17:33:59 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		find_handle(va_list tags, t_mods *mods, char *format, int i)
 	char c;
 
 	c = mods->specifier;
-	if (c == 'd' || c == 'i' || c == 'o' || c == 'u' || c == 'x' || c == 'X')
+	if (c == 'd' || c == 'i' || c == 'o' || c == 'u' ||
+			c == 'x' || c == 'X' || c == 'p')
 		return (handle_number(tags, mods));
 	else if (c == 'c')
 		return (handle_char(tags, mods));

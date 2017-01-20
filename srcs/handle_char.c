@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/15 14:07:24 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/19 21:38:44 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			handle_char(va_list tags, t_mods *mods)
 {
 	char	*ans;
 	char	str_c[2];
-	int		chr;
+	wint_t		chr;
 	int		size;
 
 	chr = mods->length == l ? va_arg(tags, wint_t) : va_arg(tags, unsigned int);

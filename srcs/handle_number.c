@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 14:38:35 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 14:55:49 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/18 17:41:20 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char			*ito_specifier(intmax_t n, char c)
 		return (ft_itoa(n));
 	if (c == 'o')
 		return (ft_itoabase(n, 8));
-	if (c == 'x' || c == 'X')
+	if (c == 'x' || c == 'X' || c == 'p')
 	{
 		i = -1;
 		hex = ft_itoabase(n, 16);
-		while (c == 'x' && hex[++i])
+		while ((c == 'x' || c == 'p') && hex[++i])
 		{
 			if (hex[i] >= 'A' && hex[i] <= 'Z')
 				hex[i] += 32;
@@ -37,18 +37,18 @@ char			*ito_specifier(intmax_t n, char c)
 
 static void		adjust_nmods(t_mods *mods, char c, intmax_t n)
 {
-	if (c == 'o' || c == 'u' || c == 'x' || c == 'X')
+	if (c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'p')
 	{
 		mods->flags.show_sign = 0;
 		mods->flags.show_space = 0;
 	}
-	if (n == 0 && (c == 'x' || c == 'X' || c == 'o'))
+	if (n == 0 && (c == 'x' || c == 'X' || c == 'o' || c == 'p'))
 		mods->flags.hash = 0;
 	if (mods->flags.hash == yes)
 	{
 		if (c == 'o')
 			mods->flags.hash = o;
-		if (c == 'x')
+		if (c == 'x' || c == 'p')
 			mods->flags.hash = x;
 		if (c == 'X')
 			mods->flags.hash = X;
