@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/19 21:38:44 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/20 17:10:49 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,23 @@ static void	adjust_cmods(t_mods *mods)
 int			handle_char(va_list tags, t_mods *mods)
 {
 	char	*ans;
-	char	str_c[2];
-	wint_t		chr;
+	char	*str_c;
+	wint_t	chr;
 	int		size;
 
-	chr = mods->length == l ? va_arg(tags, wint_t) : va_arg(tags, unsigned int);
-	str_c[0] = chr;
-	str_c[1] = '\0';
+	// fix all this shit
+	if (mods->length == l)
+	{
+		chr = va_arg(tags,wint_t);
+		if (!(str_c = malloc(sizeof(char) * ft_wclen(chr) + 1)))
+			return (-1);
+	}
+	else
+	{	
+		chr = va_arg(tags, unsigned int);
+		str_c[0] = chr;
+		str_c[1] = '\0';
+	}
 	adjust_cmods(mods);
 	size = get_size(str_c, mods);
 	if (!(ans = malloc(sizeof(char) * size + 1)))

@@ -7,18 +7,32 @@ int main()
 {
 	setlocale(LC_ALL, "");
 
-	int test = L'å';
-	int temp = test;
-	temp = (temp << 2) & 0xff;
-	temp >>= 2;
-	temp |= 0x80;
-	test >>= 6;
-	test |= 0xC0;
-	printf("%d\n", test);
-	char ans[2];
+	char ans[7];
+	ans[6] = '\0';
+	wchar_t test = L'𐄽';
+	wchar_t test2 = L'ß';
+	/*int temp = test;
+	test = (test >> 6) | 0xC0;
+	temp = (temp & 0x3f) | 0x80;
+	char ans[5];
 	ans[0] = test;
-	ans[1] = temp;
-	write(1,ans,2);
+	ans[1] = temp;*/
+	ft_wctomb(&ans[0], test);
+	ft_wctomb(&ans[4], test2);
+	/*temp = test2;
+	test2 = (test2 >> 6) | 0xC0;
+	temp = (temp & 0x3f) | 0x80;
+	ans[2] = test2;
+	ans[3] = temp;
+	ans[4] = '\0';*/
+	
+	printf("%s\n",ans);
+	wchar_t test3[4] = {L'𐄺', L'å', L'ß', L'\0'};
+	printf("len = %d\n", ft_wcslen(test3));
+	char ans2[ft_wcslen(test3) + 1];
+	ft_wcstombs(ans2, test3, ft_wcslen(test3) + 1);
+	printf("%s\n", ans2);
+	printf("%023ls\n1234567890123456789", test3);
 
 
 
