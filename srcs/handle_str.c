@@ -33,6 +33,7 @@ static char	*adjust_str(t_mods *mods, char *old_str)
 		while (++i < mods->precision)
 			new_str[i] = old_str[i];
 		new_str[i] = '\0';
+		free(old_str);
 		return (new_str);
 	}
 	else
@@ -58,14 +59,13 @@ int			handle_str(va_list tags, t_mods *mods)
 {
 	char	*ans;
 	char	*new_str;
-	int8_t	*old_str;
-	wchar_t	*old_strw;
+	wchar_t	*old_str;
 	int		size;
 
-	//if (mods->length == l)
-		//handle %ls for wchar_t*
-	//else
-		old_str = va_arg(tags, int8_t*);
+	old_str = va_arg(tags, wchar_t*);
+	if (!(new_str = malloc(sizeof(char) * ft_wcslen(old_str) + 1)))
+		return (-1);
+	ft_wcstombs(new_str, old_str, ft_wcslen(old_str) + 1);
 	if (!(new_str = adjust_str(mods, (char*)old_str)))
 		return (-1);
 	adjust_smods(mods);

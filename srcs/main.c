@@ -26,21 +26,21 @@ int main()
 	ans[3] = temp;
 	ans[4] = '\0';*/
 	
-	printf("%s\n",ans);
+	//printf("%s\n",ans);
 	wchar_t test3[4] = {L'𐄺', L'å', L'ß', L'\0'};
-	printf("len = %d\n", ft_wcslen(test3));
+	/*printf("len = %d\n", ft_wcslen(test3));
 	char ans2[ft_wcslen(test3) + 1];
 	ft_wcstombs(ans2, test3, ft_wcslen(test3) + 1);
 	printf("%s\n", ans2);
-	printf("%023ls\n1234567890123456789", test3);
-
+	printf("%012.10ls\n1234567890123456789", test3);
+*/
 
 
 	//wint_t b = 'ć';
 	char *a = "has";
 	//char *b = "asdsadsadsadsadas";
 	wint_t b = L'ß';
-	//ft_printf("my_printf:\n%x", b);
-	//printf("\nprintf:\n%c", b);
+	ft_printf("my_printf:\n%lc", );
+	printf("\nprintf:\n%lc", "asd");
 	return (0);
 }

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <stdio.h>
 static void	adjust_cmods(t_mods *mods)
 {
 	mods->flags.show_sign = 0;
@@ -21,26 +21,49 @@ static void	adjust_cmods(t_mods *mods)
 	mods->length = 0;
 }
 
-int			handle_char(va_list tags, t_mods *mods)
+static char*	just_one(va_list tags)
+{
+	char	chr;
+	char	str_c[2];
+
+	chr = va_arg(tags, char);
+	if (ft_isascii(chr))
+		str_c[0] = chr;
+	else
+		str_c[0] = '\0';
+	str_c[1] = '\0';
+	return (str_c);
+}
+
+static char*	go_wide(va_list tags)
+{
+	wchar_t	chr;
+	char	*str;
+	int		i;
+
+	i = 0;
+	chr = va_arg(tags, wchar_t);
+	if (!(str = malloc(sizeof(char) * ft_wclen(chr) + 1)))
+		return (NULL);
+	ft_wctomb(str, chr);
+	return (str);
+}
+
+int				handle_char(va_list tags, t_mods *mods)
 {
 	char	*ans;
 	char	*str_c;
-	wint_t	chr;
+	char	chr;
 	int		size;
 
-	// fix all this shit
 	if (mods->length == l)
 	{
-		chr = va_arg(tags,wint_t);
-		if (!(str_c = malloc(sizeof(char) * ft_wclen(chr) + 1)))
+		str_c = go_wide(tags);
+		if (!str_c)
 			return (-1);
 	}
 	else
-	{	
-		chr = va_arg(tags, unsigned int);
-		str_c[0] = chr;
-		str_c[1] = '\0';
-	}
+		str_c = just_one(tags);
 	adjust_cmods(mods);
 	size = get_size(str_c, mods);
 	if (!(ans = malloc(sizeof(char) * size + 1)))
