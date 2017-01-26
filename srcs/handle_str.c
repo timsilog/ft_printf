@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 13:53:41 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/17 15:55:48 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/25 16:55:41 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,32 @@ static void	adjust_smods(t_mods *mods)
 	mods->flags.show_space = 0;
 	mods->flags.hash = 0;
 	mods->length = 0;
+}
+
+static char	*adjust_mbstr(char *str, int precision)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < precision)
+	{
+		if ((j = is_mb(&str[i])))
+		{
+			if (i + j > precision)
+			{
+				while (str[i])
+					str[i++] = '\0';
+				printf("%s, ", str);
+				return (str);
+			}
+			else
+				i += j;
+		}
+		else
+			i++;
+	}
+	return (str);
 }
 
 static char	*adjust_str(t_mods *mods, char *old_str)
@@ -34,6 +60,8 @@ static char	*adjust_str(t_mods *mods, char *old_str)
 			new_str[i] = old_str[i];
 		new_str[i] = '\0';
 		free(old_str);
+		//new_str = adjust_mbstr(new_str, mods->precision);
+		mods->precision = -1;
 		return (new_str);
 	}
 	else
@@ -65,8 +93,11 @@ int			handle_str(va_list tags, t_mods *mods)
 	old_str = va_arg(tags, wchar_t*);
 	if (!(new_str = malloc(sizeof(char) * ft_wcslen(old_str) + 1)))
 		return (-1);
-	ft_wcstombs(new_str, old_str, ft_wcslen(old_str) + 1);
-	if (!(new_str = adjust_str(mods, (char*)old_str)))
+	if (mods->length == l)
+		ft_wcstombs(new_str, old_str, sizeof(new_str));
+	else
+		ft_strcpy(new_str, (char*)old_str);
+	if (!(new_str = adjust_str(mods, new_str)))
 		return (-1);
 	adjust_smods(mods);
 	size = get_strsize(new_str, mods);

@@ -6,11 +6,16 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:50:20 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 17:39:28 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/23 22:30:17 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Calculates total size of string to malloc/print
+** including width, sign, etc.
+*/
 
 int				get_size(char *str, t_mods *mods)
 {

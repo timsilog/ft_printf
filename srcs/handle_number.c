@@ -6,33 +6,38 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 14:38:35 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 17:41:20 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/23 21:59:32 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char			*ito_specifier(intmax_t n, char c)
+char			*ito_specifier(intmax_t n, t_mods *mods)
 {
-	char	*hex;
+	char	*ans;
+	char	c;
 	int		i;
 
+	c = mods->specifier;
 	if (c == 'i' || c == 'd' || c == 'u')
-		return (ft_itoa(n));
-	if (c == 'o')
-		return (ft_itoabase(n, 8));
-	if (c == 'x' || c == 'X' || c == 'p')
+		ans = (ft_itoa(n));
+	else if (c == 'o')
+		ans = (ft_itoabase(n, 8));
+	else if (c == 'x' || c == 'X' || c == 'p')
 	{
 		i = -1;
-		hex = ft_itoabase(n, 16);
-		while ((c == 'x' || c == 'p') && hex[++i])
+		ans = ft_itoabase(n, 16);
+		while ((c == 'x' || c == 'p') && ans[++i])
 		{
-			if (hex[i] >= 'A' && hex[i] <= 'Z')
-				hex[i] += 32;
+			if (ans[i] >= 'A' && ans[i] <= 'Z')
+				ans[i] += 32;
 		}
-		return (hex);
 	}
-	return (NULL);
+	else
+		return (NULL);
+	if (n == 0 && mods->precision == 0)
+		ans[0] = '\0';
+	return (ans);
 }
 
 static void		adjust_nmods(t_mods *mods, char c, intmax_t n)
@@ -64,7 +69,7 @@ int				handle_number(va_list tags, t_mods *mods)
 
 	n = va_arg(tags, intmax_t);
 	n = convert_length(n, mods, mods->specifier);
-	str_n = ito_specifier(n, mods->specifier);
+	str_n = ito_specifier(n, mods);
 	adjust_nmods(mods, mods->specifier, n);
 	size = get_size(str_n, mods);
 	if (!(ans = malloc(sizeof(char) * size + 1)))
@@ -72,5 +77,5 @@ int				handle_number(va_list tags, t_mods *mods)
 	mods->flags.left_justify ? place_left(mods, &ans, size, str_n) :
 		place_right(mods, &ans, size, str_n);
 	ft_putstr(ans);
-	return (size);
+	return (ft_strlen(ans));
 }

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 17:33:59 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/25 16:25:13 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_mods(t_mods *mods)
 	mods->precision = 0;
 	mods->length = none;
 	mods->specifier = '\0';
+	mods->p_found = 0;
 }
 
 int		find_mods(int i, const char *format, t_mods *mods, va_list tags)

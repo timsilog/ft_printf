@@ -6,12 +6,12 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/20 17:10:49 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/23 22:05:34 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
 static void	adjust_cmods(t_mods *mods)
 {
 	mods->flags.show_sign = 0;
@@ -21,7 +21,7 @@ static void	adjust_cmods(t_mods *mods)
 	mods->length = 0;
 }
 
-static char*	just_one(va_list tags)
+static char		*just_one(va_list tags)
 {
 	char	chr;
 	char	str_c[2];
@@ -35,7 +35,7 @@ static char*	just_one(va_list tags)
 	return (str_c);
 }
 
-static char*	go_wide(va_list tags)
+static char		*go_wide(va_list tags)
 {
 	wchar_t	chr;
 	char	*str;

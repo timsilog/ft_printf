@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:59:32 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/19 20:19:55 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/25 14:45:58 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int main()
 	wchar_t c[] = L"åß∂ƒœ∑´";
 
 //	printf("%5.5+d(ayqweqweqw;;wlrsdfjs%d\n12345678901234567890", 123);
-	printf("%d ", printf("'%s'\n",c));
+	//printf("%d ", printf("'%s'\n",c));
+	if (0xffffffff < 0xff)
+		printf("%x", -222222);
 }

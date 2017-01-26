@@ -40,7 +40,30 @@ int main()
 	char *a = "has";
 	//char *b = "asdsadsadsadsadas";
 	wint_t b = L'ß';
-	ft_printf("my_printf:\n%lc", );
-	printf("\nprintf:\n%lc", "asd");
+	/*int i = 0;
+	char qwe[9];
+	ft_wcstombs(qwe,test3,9);
+	while (qwe[i])
+	{
+		int j = 0;
+		if ((j = is_mb(&qwe[i])))
+		{
+			printf("%d, ", qwe[i]);
+			i+=j;
+		}
+		else
+			i++;
+		ft_putstr(qwe);
+	}*/
+
+	ft_printf("my_printf:\n%05.1ls\n", test3);
+	printf("\nprintf:\n%05.1ls\n", test3);
+
+	/*debug_d_i_ints();
+	debug_d_i_len_mod();
+	debug_d_i_precision();
+	debug_d_i_space();
+	debug_d_i_plus();
+	debug_d_i_pound();*/
 	return (0);
 }

@@ -6,11 +6,17 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 14:53:43 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/17 16:06:39 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/23 22:33:01 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** If there's no specifier and no characters to print, nothing is printed.
+** If there are characters to print, the first printable character is
+** printed with the specified width. '0' and '-' flags work.
+*/
 
 static void	adjust_nsmods(t_mods *mods)
 {
