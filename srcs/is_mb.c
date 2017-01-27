@@ -29,13 +29,13 @@ static int	is_n_bytes(char *s, int n)
 	int i;
 
 	i = 1;
-	while (s[i] && i < n - 1)
+	while (s[i] && i < n)
 	{
 		if (s[i] >= -64)
 			return (0);
 		i++;
 	}
-	if (i == n - 1)
+	if (i == n)
 		return (n);
 	return (0);
 }

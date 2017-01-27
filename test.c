@@ -16,6 +16,7 @@
 #include <wchar.h>
 #include <stdlib.h>
 #include <locale.h>
+#include "./includes/ft_printf.h"
 
 int fun(int cnt, ...)
 {
@@ -55,9 +56,9 @@ int main()
 
 	int a = L'ć';
 	wchar_t c[] = L"åß∂ƒœ∑´";
-
+	ft_printf("%s", "hello world");
 //	printf("%5.5+d(ayqweqweqw;;wlrsdfjs%d\n12345678901234567890", 123);
 	//printf("%d ", printf("'%s'\n",c));
-	if (0xffffffff < 0xff)
+	//if (0xffffffff < 0xff)
 		printf("%x", -222222);
 }

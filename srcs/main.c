@@ -56,8 +56,8 @@ int main()
 		ft_putstr(qwe);
 	}*/
 
-	ft_printf("my_printf:\n%05.1ls\n", test3);
-	printf("\nprintf:\n%05.1ls\n", test3);
+	ft_printf("my_printf:\n%0.s\n", "123");
+	printf("\nprintf:\n%0.s\n", "123");
 
 	/*debug_d_i_ints();
 	debug_d_i_len_mod();
