@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:43:16 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 17:39:46 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 16:59:13 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,4 @@ int		handle_specifier(char c, va_list tags, t_mods *mods)
 	}
 	mods->specifier = c;
 	return (1);
-	/*if (c == 'p') // address?
-	*/
-	// bonus: eE fF gG aA n
 }

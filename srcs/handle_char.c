@@ -6,13 +6,13 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/23 22:05:34 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 16:58:36 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	adjust_cmods(t_mods *mods)
+static void		adjust_cmods(t_mods *mods)
 {
 	mods->flags.show_sign = 0;
 	mods->flags.show_space = 0;

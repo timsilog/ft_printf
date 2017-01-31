@@ -6,17 +6,17 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 22:13:48 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/25 15:54:07 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 16:58:23 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** Checks if current character of a given string is a complete 
+** Checks if current character of a given string is a complete
 ** multibyte character.
 ** If there's only part of a mb char then it returns false.
-** Otherwise returns number of characters read. 
+** Otherwise returns number of characters read.
 ** (Works with single-byte characters as well)
 ** 1b - 0xxx xxxx (0 < s[i])
 ** 2b - 110x xxxx  10xx xxxx (s[i] < -32)

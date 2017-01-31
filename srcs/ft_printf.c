@@ -6,12 +6,11 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/25 16:25:13 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:01:31 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 void	init_mods(t_mods *mods)
 {
@@ -69,11 +68,10 @@ int		find_handle(va_list tags, t_mods *mods, char *format, int i)
 		return (handle_nospec(mods));
 }
 
-int		print_string(const char *format, int count,
-t_mods mods, va_list tags)
+int		print_string(const char *format, int count, t_mods mods, va_list tags)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (format[i])
@@ -105,13 +103,12 @@ int		ft_printf(const char *format, ...)
 	int		count;
 	t_mods	mods;
 	
-	if (!format) // format[0]?
+	if (!format)
 		return (0);
 	va_start(tags, format);
 	count = 0;
 	if ((count = print_string(format, count, mods, tags)) < 0)
 		return (-1);
 
-
-	return (count);//return num char printed
+	return (count);
 }
