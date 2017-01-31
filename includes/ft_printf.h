@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:00:35 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/30 17:20:57 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/31 13:51:56 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdint.h>
 # include <wchar.h>
 # include "../libft/libft.h"
-# include <stdio.h>///////////
+# include <stdio.h>/////
 
 typedef enum
 {
@@ -74,14 +74,8 @@ int					place_sign(t_mods *mods, char **ans, int i, char *n);
 int					place_number(t_mods *mods, char **ans, int i, char *n);
 int					get_size(char *str, t_mods *mods);
 int					is_mb(char *s);
-intmax_t			convert_length(intmax_t n, t_mods *mods, char c);
+char				*convert_length(va_list tags, t_mods *mods, char c);
+char				*convert_ulength(va_list tags, t_mods *mods, char c);
 void				place_right(t_mods *mods, char **ans, int size, char *n);
 void				place_left(t_mods *mods, char **ans, int size, char *n);
-
-void	debug_d_i_ints();
-void	debug_d_i_len_mod();
-void	debug_d_i_precision();
-void	debug_d_i_space();
-void	debug_d_i_plus();
-void	debug_d_i_pound();
 #endif

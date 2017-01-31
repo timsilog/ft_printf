@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/30 17:24:21 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:31:39 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static int	find_handle(va_list tags, t_mods *mods, const char *format, int i)
 	return (-1);
 }
 
-static int	print_string(const char *format, int count, t_mods mods, va_list tags)
+static int	print_string(const char *format, int count,
+		t_mods mods, va_list tags)
 {
 	int		i;
 	int		j;
@@ -100,7 +101,7 @@ int			ft_printf(const char *format, ...)
 	va_list	tags;
 	int		count;
 	t_mods	mods;
-	
+
 	if (!format)
 		return (0);
 	va_start(tags, format);

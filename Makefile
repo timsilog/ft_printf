@@ -6,7 +6,7 @@
 #    By: tjose <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/06 15:03:02 by tjose             #+#    #+#              #
-#    Updated: 2017/01/25 15:45:59 by tjose            ###   ########.fr        #
+#    Updated: 2017/01/31 14:14:34 by tjose            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ LIBFTFILES = ft_putchar.c \
 			 ft_strnequ.c \
 			 ft_strsplit.c \
 			 ft_itoabase.c \
+			 ft_uitoabase.c \
 			 ft_numlen.c \
 			 ft_strsub.c \
 			 ft_strtrim.c \

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 11:06:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/20 16:56:12 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/31 14:13:16 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char				*ft_strnew(size_t size);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
 char				*ft_itoabase(intmax_t value, int base);
+char				*ft_uitoabase(uintmax_t value, int base);
 char				**ft_strsplit(char const *s, char c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
