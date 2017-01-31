@@ -6,13 +6,13 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/30 17:01:31 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:20:40 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	init_mods(t_mods *mods)
+static void	init_mods(t_mods *mods)
 {
 	mods->flags.left_justify = 0;
 	mods->flags.show_sign = 0;
@@ -26,7 +26,7 @@ void	init_mods(t_mods *mods)
 	mods->p_found = 0;
 }
 
-int		find_mods(int i, const char *format, t_mods *mods, va_list tags)
+static int	find_mods(int i, const char *format, t_mods *mods, va_list tags)
 {
 	int j;
 
@@ -52,7 +52,7 @@ int		find_mods(int i, const char *format, t_mods *mods, va_list tags)
 	return (i);
 }
 
-int		find_handle(va_list tags, t_mods *mods, char *format, int i)
+static int	find_handle(va_list tags, t_mods *mods, const char *format, int i)
 {
 	char c;
 
@@ -66,9 +66,10 @@ int		find_handle(va_list tags, t_mods *mods, char *format, int i)
 		return (handle_str(tags, mods));
 	else if (mods->specifier)
 		return (handle_nospec(mods));
+	return (-1);
 }
 
-int		print_string(const char *format, int count, t_mods mods, va_list tags)
+static int	print_string(const char *format, int count, t_mods mods, va_list tags)
 {
 	int		i;
 	int		j;
@@ -97,7 +98,7 @@ int		print_string(const char *format, int count, t_mods mods, va_list tags)
 	return (count);
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list	tags;
 	int		count;
@@ -109,6 +110,5 @@ int		ft_printf(const char *format, ...)
 	count = 0;
 	if ((count = print_string(format, count, mods, tags)) < 0)
 		return (-1);
-
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/30 16:58:36 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:19:01 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ static void		adjust_cmods(t_mods *mods)
 static char		*just_one(va_list tags)
 {
 	char	chr;
-	char	str_c[2];
+	char	*str;
 
-	chr = va_arg(tags, char);
+	if (!(str = malloc(sizeof(char) * 2)))
+		return (NULL);
+	chr = va_arg(tags, int);
 	if (ft_isascii(chr))
-		str_c[0] = chr;
+		str[0] = chr;
 	else
-		str_c[0] = '\0';
-	str_c[1] = '\0';
-	return (str_c);
+		str[0] = '\0';
+	str[1] = '\0';
+	return (&str[0]);
 }
 
 static char		*go_wide(va_list tags)
