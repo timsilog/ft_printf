@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/30 17:20:40 by tjose            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:24:21 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ static int	print_string(const char *format, int count, t_mods mods, va_list tags
 			count++;
 		}
 	}
-	////////////////////////////////////////////////////////////
-	char *a[7] = {"none", "hh", "h", "l", "ll", "j", "z"};
-	printf("\n.........................\nleft_justify = %s\t.\nshow_sign = %s\t\t.\nshow_space = %s\t\t.\nhash = %s\t\t.\nfill_zeroes = %s\t.\nwidth = %d\t\t.\nprecision = %d\t\t.\nlength = %s\t\t.\n.........................",mods.flags.left_justify ? "yes" : "no",mods.flags.show_sign?"yes":"no",mods.flags.show_space?"yes":"no",mods.flags.hash?"yes":"no",mods.flags.fill_zeroes?"yes":"no",mods.width,mods.precision, a[mods.length]);////////////////////////////////////
 	return (count);
 }
 
