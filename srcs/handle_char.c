@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 20:05:46 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 20:16:26 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ static void		adjust_cmods(t_mods *mods, char *str_c)
 	mods->length = 0;
 }
 
+/*
+**	Add the following below the va_arg to support wide characters:
+**	if (ft_isascii(chr))
+**		str[0] = chr;
+**	else
+**		str[0] = '\0';
+*/
+
 static char		*just_one(va_list tags)
 {
 	char	chr;
@@ -31,13 +39,14 @@ static char		*just_one(va_list tags)
 	if (!(str = malloc(sizeof(char) * 2)))
 		return (NULL);
 	chr = va_arg(tags, int);
-	//if (ft_isascii(chr))
-		str[0] = chr;
-	//else
-	//	str[0] = '\0';
+	str[0] = chr;
 	str[1] = '\0';
 	return (&str[0]);
 }
+
+/*
+**	This is only used for wide characters
+*/
 
 static char		*go_wide(va_list tags)
 {
@@ -53,6 +62,18 @@ static char		*go_wide(va_list tags)
 	return (str);
 }
 
+/*
+**	Add the following below to support wide characters:
+**	if (mods->length == l)
+**	{
+**		str_c = go_wide(tags);
+**		if (!str_c)
+**			return (-1);
+**	}
+**	else
+**		str_c = just_one(tags);
+*/
+
 int				handle_char(va_list tags, t_mods *mods)
 {
 	char	*ans;
@@ -60,14 +81,7 @@ int				handle_char(va_list tags, t_mods *mods)
 	char	chr;
 	int		size;
 
-	/*if (mods->length == l)
-	{
-		str_c = go_wide(tags);
-		if (!str_c)
-			return (-1);
-	}
-	else*/
-		str_c = just_one(tags);
+	str_c = just_one(tags);
 	adjust_cmods(mods, str_c);
 	size = get_size(str_c, mods);
 	if (!(ans = malloc(sizeof(char) * size + 1)))
