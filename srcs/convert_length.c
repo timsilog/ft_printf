@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:15:06 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 17:52:42 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 19:48:37 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		adjust_nmods(t_mods *mods, char c, intmax_t n)
 		mods->flags.show_sign = 0;
 		mods->flags.show_space = 0;
 	}
-	if (n == 0 && (c == 'x' || c == 'X' || c == 'p'))
+	if (n == 0 && (c == 'x' || c == 'X'))
 		mods->flags.hash = 0;
 	if (mods->flags.hash == yes)
 	{
@@ -113,7 +113,8 @@ char		*convert_length(va_list tags, t_mods *mods, char c)
 		return (ito_specifier((long)n, mods));
 	else if (mods->length == ll)
 	{
-		temp = ito_uspecifier((long long)n, mods);
+		temp = (n < 0) ? ito_uspecifier((long long)-n, mods) :
+			ito_uspecifier((long long)n, mods);
 		if (n < 0)
 			return (ft_strjoin("-", temp));
 		return (temp);
