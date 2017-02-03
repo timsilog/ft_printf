@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:12:45 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 16:47:25 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 21:28:52 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int			handle_length(const char *str, t_mods *mods)
 	i = 0;
 	if (str[i] == 'h' || str[i] == 'l')
 		i = check_double(str, mods, i);
-	else if (str[i] == 'j' && mods->length < j)
+	else if (str[i] == 'j')
 		mods->length = j;
-	else if (str[i] == 'z' && mods->length < z)
+	else if (str[i] == 'z')
 		mods->length = z;
 	else
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:59:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 13:34:56 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 21:43:10 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int		handle_width(const char *str, t_mods *mods, va_list tags)
 	if (str[i] == '*')
 	{
 		mods->width = va_arg(tags, int);
+		if (mods->width < 0)
+		{
+			mods->flags.left_justify = 1;
+			mods->width *= -1;
+		}
 		return (1);
 	}
 	if (ft_isdigit(str[i]))

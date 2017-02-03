@@ -6,13 +6,13 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:15:06 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 19:48:37 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 21:14:41 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		adjust_nmods(t_mods *mods, char c, intmax_t n)
+static void	adjust_nmods(t_mods *mods, char c, intmax_t n)
 {
 	if (c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'p')
 	{
@@ -48,7 +48,7 @@ static char	*ito_specifier(intmax_t n, t_mods *mods)
 	return (ans);
 }
 
-static char *ito_uspecifier(uintmax_t n, t_mods *mods)
+static char	*ito_uspecifier(uintmax_t n, t_mods *mods)
 {
 	char	*ans;
 	char	c;
@@ -100,8 +100,8 @@ char		*convert_ulength(va_list tags, t_mods *mods, char c)
 
 char		*convert_length(va_list tags, t_mods *mods, char c)
 {
-	intmax_t n;
-	char *temp;
+	intmax_t	n;
+	char		*temp;
 
 	n = va_arg(tags, intmax_t);
 	adjust_nmods(mods, c, n);

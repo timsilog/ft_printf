@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 13:08:44 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 19:56:41 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 21:12:30 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		place_sign(t_mods *mods, char **ans, int i, char *n)
 {
 	if (n[0] == '-')
 		(*ans)[i++] = '-';
-	else if ((mods->flags.hash == o && n[0] != '0')	||
-			mods->flags.hash == x || mods->flags.hash == X)
+	else if ((mods->flags.hash == o && n[0] != '0')
+			|| mods->flags.hash == x || mods->flags.hash == X)
 	{
 		(*ans)[i++] = '0';
 		if (mods->flags.hash == x)

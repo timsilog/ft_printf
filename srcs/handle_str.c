@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 13:53:41 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/01 20:57:22 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 21:39:14 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ static char	*get_new_str(va_list tags, t_mods *mods)
 
 	old_str = va_arg(tags, wchar_t*);
 	if (old_str == NULL)
-		new_str = ft_strdup("(null)");	
-	else 
+		new_str = ft_strdup("(null)");
+	else
 	{
 		if (!(new_str = malloc(sizeof(char) * ft_wcslen(old_str) + 1)))
 			return (NULL);
 		if (mods->length == l)
-			ft_wcstombs(new_str, old_str, sizeof(new_str));
+			ft_wcstombs(new_str, old_str, ft_wcslen(old_str) + 1);
 		else
 			ft_strcpy(new_str, (char*)old_str);
 	}
