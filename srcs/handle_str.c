@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 13:53:41 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/30 17:17:52 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/01 20:57:22 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,39 +61,38 @@ static char	*adjust_str(t_mods *mods, char *old_str)
 		return (old_str);
 }
 
-static int	get_strsize(char *str, t_mods *mods)
+static char	*get_new_str(va_list tags, t_mods *mods)
 {
-	int len;
-	int size;
+	wchar_t	*old_str;
+	char	*new_str;
 
-	len = 0;
-	while (str[len])
-		len++;
-	if (mods->width < len)
-		size = len;
-	else
-		size = mods->width;
-	return (size);
+	old_str = va_arg(tags, wchar_t*);
+	if (old_str == NULL)
+		new_str = ft_strdup("(null)");	
+	else 
+	{
+		if (!(new_str = malloc(sizeof(char) * ft_wcslen(old_str) + 1)))
+			return (NULL);
+		if (mods->length == l)
+			ft_wcstombs(new_str, old_str, sizeof(new_str));
+		else
+			ft_strcpy(new_str, (char*)old_str);
+	}
+	if (!(new_str = adjust_str(mods, new_str)))
+		return (NULL);
+	return (new_str);
 }
 
 int			handle_str(va_list tags, t_mods *mods)
 {
 	char	*ans;
 	char	*new_str;
-	wchar_t	*old_str;
 	int		size;
 
-	old_str = va_arg(tags, wchar_t*);
-	if (!(new_str = malloc(sizeof(char) * ft_wcslen(old_str) + 1)))
-		return (-1);
-	if (mods->length == l)
-		ft_wcstombs(new_str, old_str, sizeof(new_str));
-	else
-		ft_strcpy(new_str, (char*)old_str);
-	if (!(new_str = adjust_str(mods, new_str)))
+	if (!(new_str = get_new_str(tags, mods)))
 		return (-1);
 	adjust_smods(mods);
-	size = get_strsize(new_str, mods);
+	size = mods->width < ft_strlen(new_str) ? ft_strlen(new_str) : mods->width;
 	if (!(ans = malloc(sizeof(char) * size + 1)))
 		return (-1);
 	mods->flags.left_justify ? place_left(mods, &ans, size, new_str) :

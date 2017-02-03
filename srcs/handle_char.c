@@ -6,14 +6,16 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/30 17:19:01 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 15:06:06 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		adjust_cmods(t_mods *mods)
+static void		adjust_cmods(t_mods *mods, char *str_c)
 {
+	if (!str_c[0] && mods->width > 0)
+		mods->width--;
 	mods->flags.show_sign = 0;
 	mods->flags.show_space = 0;
 	mods->flags.hash = 0;
@@ -66,12 +68,14 @@ int				handle_char(va_list tags, t_mods *mods)
 	}
 	else
 		str_c = just_one(tags);
-	adjust_cmods(mods);
+	adjust_cmods(mods, str_c);
 	size = get_size(str_c, mods);
 	if (!(ans = malloc(sizeof(char) * size + 1)))
 		return (-1);
 	mods->flags.left_justify ? place_left(mods, &ans, size, str_c) :
 		place_right(mods, &ans, size, str_c);
 	ft_putstr(ans);
+	if (!str_c[0])
+		size++;
 	return (size);
 }

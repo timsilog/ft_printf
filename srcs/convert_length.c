@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:15:06 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/01 18:55:23 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 17:52:42 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		adjust_nmods(t_mods *mods, char c, intmax_t n)
 		mods->flags.show_sign = 0;
 		mods->flags.show_space = 0;
 	}
-	if (n == 0 && (c == 'x' || c == 'X' || c == 'o' || c == 'p'))
+	if (n == 0 && (c == 'x' || c == 'X' || c == 'p'))
 		mods->flags.hash = 0;
 	if (mods->flags.hash == yes)
 	{
@@ -55,7 +55,7 @@ static char *ito_uspecifier(uintmax_t n, t_mods *mods)
 	int		i;
 
 	c = mods->specifier;
-	if (c == 'u')
+	if (c == 'u' || c == 'd' || c == 'i')
 		ans = ft_uitoabase(n, 10);
 	else if (c == 'o')
 		ans = ft_uitoabase(n, 8);
@@ -101,6 +101,7 @@ char		*convert_ulength(va_list tags, t_mods *mods, char c)
 char		*convert_length(va_list tags, t_mods *mods, char c)
 {
 	intmax_t n;
+	char *temp;
 
 	n = va_arg(tags, intmax_t);
 	adjust_nmods(mods, c, n);
@@ -111,7 +112,12 @@ char		*convert_length(va_list tags, t_mods *mods, char c)
 	else if (mods->length == l)
 		return (ito_specifier((long)n, mods));
 	else if (mods->length == ll)
-		return (ito_specifier((long long)n, mods));
+	{
+		temp = ito_uspecifier((long long)n, mods);
+		if (n < 0)
+			return (ft_strjoin("-", temp));
+		return (temp);
+	}
 	else if (mods->length == j)
 		return (ito_specifier(n, mods));
 	else if (mods->length == z)

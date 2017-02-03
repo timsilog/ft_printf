@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 13:08:44 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/18 17:43:51 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 17:17:27 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		adjust_i(t_mods *mods, int i, char *n)
 	if (((mods->flags.show_sign || mods->flags.show_space)
 				&& n[0] != '-') || mods->flags.hash == o)
 		i--;
-	if (mods->precision > (int)ft_strlen(n) && n[0] == '-')
+	if (mods->precision >= (int)ft_strlen(n) && n[0] == '-')
 		i--;
 	if (mods->flags.hash == x || mods->flags.hash == X)
 		i -= 2;
