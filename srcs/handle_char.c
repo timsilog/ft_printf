@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 20:05:07 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 20:05:46 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static char		*just_one(va_list tags)
 	chr = va_arg(tags, int);
 	//if (ft_isascii(chr))
 		str[0] = chr;
-	else
-		str[0] = '\0';
+	//else
+	//	str[0] = '\0';
 	str[1] = '\0';
 	return (&str[0]);
 }
