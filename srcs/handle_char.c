@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 19:59:51 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/02 20:02:34 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char		*go_wide(va_list tags)
 	if (!(str = malloc(sizeof(char) * ft_wclen(chr) + 1)))
 		return (NULL);
 	ft_wctomb(str, chr);
+	str[0] = str[1];
 	str[1] = '\0';
 	return (str);
 }
