@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 14:38:35 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 19:04:42 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/06 13:24:55 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int				handle_number(va_list tags, t_mods *mods)
 	char		*str_n;
 	int			size;
 	char		c;
+	int			ret;
 
 	c = mods->specifier;
 	if (c == 'u' || c == 'x' || c == 'o' || c == 'X' || c == 'p')
@@ -30,5 +31,8 @@ int				handle_number(va_list tags, t_mods *mods)
 	mods->flags.left_justify ? place_left(mods, &ans, size, str_n) :
 		place_right(mods, &ans, size, str_n);
 	ft_putstr(ans);
-	return (ft_strlen(ans));
+	ret = ft_strlen(ans);
+	free(str_n);
+	free(ans);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 21:11:10 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/06 15:10:21 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char		*just_one(va_list tags)
 	chr = va_arg(tags, int);
 	str[0] = chr;
 	str[1] = '\0';
-	return (&str[0]);
+	return (str);
 }
 
 /*
@@ -91,5 +91,7 @@ int				handle_char(va_list tags, t_mods *mods)
 	ft_putstr(ans);
 	if (!str_c[0])
 		size++;
+	free(str_c);
+	free(ans);
 	return (size);
 }

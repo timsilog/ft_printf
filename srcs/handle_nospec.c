@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 14:53:43 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/23 22:33:01 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/06 13:30:48 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int			handle_nospec(t_mods *mods)
 	mods->flags.left_justify ? place_left(mods, &ans, size, temp) :
 		place_right(mods, &ans, size, temp);
 	ft_putstr(ans);
+	free(ans);
 	return (size);
 }
