@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/06 15:15:47 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/06 15:18:08 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ int				handle_char(va_list tags, t_mods *mods)
 		place_right(mods, &ans, size, str_c);
 	ft_putstr(ans);
 	if (!str_c[0])
+	{
+		ft_putchar('\0');
 		size++;
+	}
 	free(str_c);
 	free(ans);
 	return (size);
