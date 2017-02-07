@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:15:06 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/04 14:10:01 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/06 16:26:20 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,7 @@ static void	adjust_nmods(t_mods *mods, char c, intmax_t n)
 	}
 }
 
-static char	*ito_specifier(intmax_t n, t_mods *mods)
-{
-	char	*ans;
-	char	c;
-	int		i;
-
-	c = mods->specifier;
-	if (c == 'i' || c == 'd')
-		ans = (ft_itoa(n));
-	else
-		return (NULL);
-	if (n == 0 && mods->precision == 0)
-		ans[0] = '\0';
-	return (ans);
-}
-
-static char	*ito_uspecifier(uintmax_t n, t_mods *mods)
+static char	*ito_specifier(intmax_t n, t_mods *mods, int u_flag)
 {
 	char	*ans;
 	char	c;
@@ -56,7 +40,7 @@ static char	*ito_uspecifier(uintmax_t n, t_mods *mods)
 
 	c = mods->specifier;
 	if (c == 'u' || c == 'd' || c == 'i')
-		ans = ft_uitoabase(n, 10);
+		ans = u_flag ? ft_uitoabase(n, 10) : ft_itoa(n);
 	else if (c == 'o')
 		ans = ft_uitoabase(n, 8);
 	else if (c == 'x' || c == 'X' || c == 'p')
@@ -83,45 +67,54 @@ char		*convert_ulength(va_list tags, t_mods *mods, char c)
 	n = va_arg(tags, uintmax_t);
 	adjust_nmods(mods, c, n);
 	if (mods->length == hh)
-		return (ito_uspecifier((unsigned char)n, mods));
+		return (ito_specifier((unsigned char)n, mods, 1));
 	else if (mods->length == h)
-		return (ito_uspecifier((unsigned short)n, mods));
+		return (ito_specifier((unsigned short)n, mods, 1));
 	else if (mods->length == l)
-		return (ito_uspecifier((unsigned long)n, mods));
+		return (ito_specifier((unsigned long)n, mods, 1));
 	else if (mods->length == ll)
-		return (ito_uspecifier((unsigned long long)n, mods));
+		return (ito_specifier((unsigned long long)n, mods, 1));
 	else if (mods->length == j)
-		return (ito_uspecifier((uintmax_t)n, mods));
+		return (ito_specifier((uintmax_t)n, mods, 1));
 	else if (mods->length == z)
-		return (ito_uspecifier((ssize_t)n, mods));
+		return (ito_specifier((ssize_t)n, mods, 1));
 	else
-		return (ito_uspecifier((unsigned int)n, mods));
+		return (ito_specifier((unsigned int)n, mods, 1));
+}
+
+static char	*check_neg(intmax_t n, t_mods *mods)
+{
+	char *temp;
+
+	if (mods->length == l)
+		temp = (n < 0) ? ito_specifier((long)-n, mods, 1) :
+			ito_specifier((long)n, mods, 1);
+	else if (mods->length == ll)
+		temp = (n < 0) ? ito_specifier((long long)-n, mods, 1) :
+			ito_specifier((long long)n, mods, 1);
+	else if (mods->length == j)
+		temp = (n < 0) ? ito_specifier(-n, mods, 1) :
+			ito_specifier(n, mods, 1);
+	else if (mods->length == z)
+		temp = (n < 0) ? ito_specifier((size_t)-n, mods, 1) :
+			ito_specifier((size_t)n, mods, 1);
+	if (n < 0)
+		return (ft_strjoin("-", temp));
+	return (temp);
 }
 
 char		*convert_length(va_list tags, t_mods *mods, char c)
 {
 	intmax_t	n;
-	char		*temp;
 
 	n = va_arg(tags, intmax_t);
 	adjust_nmods(mods, c, n);
 	if (mods->length == hh)
-		return (ito_specifier((char)n, mods));
+		return (ito_specifier((char)n, mods, 0));
 	else if (mods->length == h)
-		return (ito_specifier((short)n, mods));
-	else if (mods->length == l)
-		return (ito_specifier((long)n, mods));
-	else if (mods->length == ll)
-		temp = (n < 0) ? ito_uspecifier((long long)-n, mods) :
-			ito_uspecifier((long long)n, mods);
-	else if (mods->length == j)
-		temp = (n < 0) ? ito_uspecifier((long long)-n, mods) :
-			ito_uspecifier(n, mods);
-	else if (mods->length == z)
-		return (ito_specifier((size_t)n, mods));
-	else
-		return (ito_specifier((int)n, mods));
-	if (n < 0)
-		return (ft_strjoin("-", temp));
-	return (temp);
+		return (ito_specifier((short)n, mods, 0));
+	else if (mods->length == l || mods->length == ll || mods->length == j
+			|| mods->length == z)
+		return (check_neg(n, mods));
+	return (ito_specifier((int)n, mods, 0));
 }

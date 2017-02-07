@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 13:38:55 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/06 15:18:08 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/06 16:29:20 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,13 @@ int				handle_char(va_list tags, t_mods *mods)
 		return (-1);
 	mods->flags.left_justify ? place_left(mods, &ans, size, str_c) :
 		place_right(mods, &ans, size, str_c);
-	ft_putstr(ans);
-	if (!str_c[0])
-	{
+	if (mods->flags.left_justify && !str_c[0])
 		ft_putchar('\0');
+	ft_putstr(ans);
+	if (!mods->flags.left_justify && !str_c[0])
+		ft_putchar('\0');
+	if (!str_c[0])
 		size++;
-	}
 	free(str_c);
 	free(ans);
 	return (size);

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:50:20 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 16:32:19 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/06 15:38:06 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int				get_size(char *str, t_mods *mods)
 	int hash_adjust;
 
 	len = (str[0] == '-') ? ft_strlen(str) - 1 : ft_strlen(str);
-	hash_adjust = (mods->specifier == 'o' && mods->flags.hash) ? 1 : 0;
+	hash_adjust = (mods->specifier == 'o' && mods->flags.hash &&
+			len >= mods->precision) ? 1 : 0;
 	if ((mods->specifier == 'x' || mods->specifier == 'X' ||
 				mods->specifier == 'p') && mods->flags.hash)
 		hash_adjust += 2;
