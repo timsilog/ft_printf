@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:00:35 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/31 13:51:56 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/07 15:05:01 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdint.h>
 # include <wchar.h>
 # include "../libft/libft.h"
-# include <stdio.h>/////
 
 typedef enum
 {
@@ -56,7 +55,6 @@ typedef struct		s_mods
 	int				precision;
 	t_conversion	length;
 	char			specifier;
-	int				p_found;
 }					t_mods;
 
 int					ft_printf(const char *format, ...);

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 13:08:44 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/06 14:41:39 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/08 14:49:00 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ int		place_content(t_mods *mods, char **ans, int i, char *n)
 {
 	int			precision;
 	int			j;
+	int			len;
 
-	precision = mods->precision - ft_strlen(n);
+	len = ft_strlen(n);
+	precision = mods->precision - len;
 	j = 0;
 	if (n[0] == '-')
 	{
@@ -51,12 +53,12 @@ int		place_content(t_mods *mods, char **ans, int i, char *n)
 	return (i);
 }
 
-int		adjust_i(t_mods *mods, int i, char *n)
+int		adjust_i(t_mods *mods, int i, char *n, int len)
 {
 	if (((mods->flags.show_sign || mods->flags.show_space)
 				&& n[0] != '-') || mods->flags.hash == o)
 		i--;
-	if (mods->precision >= (int)ft_strlen(n) && n[0] == '-')
+	if (mods->precision >= len && n[0] == '-')
 		i--;
 	if (mods->flags.hash == x || mods->flags.hash == X)
 		i -= 2;
@@ -67,23 +69,25 @@ void	place_right(t_mods *mods, char **ans, int size, char *n)
 {
 	int			i;
 	int			bigger;
+	int			len;
 
-	i = 0;
 	if (mods->precision < 0 && mods->flags.fill_zeroes)
 	{
 		i = place_sign(mods, ans, i, n);
 		if (n[0] == '-')
 			n++;
-		while (i < size - ft_strlen(n))
+		len = ft_strlen(n);
+		while (i < size - len)
 			(*ans)[i++] = '0';
 	}
 	else
 	{
-		bigger = ((int)ft_strlen(n) > mods->precision) ?
-			size - ft_strlen(n) : size - mods->precision;
+		i = 0;
+		len = ft_strlen(n);
+		bigger = (len > mods->precision) ? size - len : size - mods->precision;
 		while (i < bigger)
 			(*ans)[i++] = ' ';
-		i = adjust_i(mods, i, n);
+		i = adjust_i(mods, i, n, len);
 		i = place_sign(mods, ans, i, n);
 	}
 	i = place_content(mods, ans, i, n);

@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 17:27:31 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/02 21:16:32 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/08 19:30:42 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,32 @@ static void	init_mods(t_mods *mods)
 	mods->flags.hash = no;
 	mods->flags.fill_zeroes = 0;
 	mods->width = 0;
-	mods->precision = 0;
+	mods->precision = -1;
 	mods->length = none;
 	mods->specifier = '\0';
-	mods->p_found = 0;
 }
 
 static int	find_mods(int i, const char *format, t_mods *mods, va_list tags)
 {
-	int j;
-
-	j = 1;
-	while (j && format[i])
+	while (format[i])
 	{
-		if ((j = handle_flags(&format[i], mods)))
-			i += j;
-		else if ((j = handle_width(&format[i], mods, tags)))
-			i += j;
-		else if ((j = handle_precision(&format[i], mods, tags)))
-			i += j;
-		else if ((j = handle_length(&format[i], mods)))
-			i += j;
+		if (format[i] == '-' || format[i] == '+' || format[i] == ' '
+				|| format[i] == '#' || format[i] == '0')
+			i += handle_flags(&format[i], mods);
+		else if (format[i] == '*' || ft_isdigit(format[i]))
+			i += handle_width(&format[i], mods, tags);
+		else if (format[i] == '.')
+			i += handle_precision(&format[i], mods, tags);
+		else if (format[i] == 'h' || format[i] == 'l' ||
+				format[i] == 'j' || format[i] == 'z')
+			i += handle_length(&format[i], mods);
 		else if (format[i])
 		{
 			i += handle_specifier(format[i], tags, mods);
 			break ;
 		}
 		else
-			j = 0;
+			break ;
 	}
 	return (i);
 }
@@ -74,23 +72,26 @@ static int	print_string(const char *format, int count,
 {
 	int		i;
 	int		j;
+	char	*temp;
 
 	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if ((temp = ft_strchr(&format[i], '%')))
 		{
-			i++;
+			write(1, &format[i], temp - &format[i]);
+			count += temp - &format[i];
 			init_mods(&mods);
-			i = find_mods(i, format, &mods, tags);
+			i = find_mods(i + temp - &format[i] + 1, format, &mods, tags);
 			if ((j = find_handle(tags, &mods)) < 0)
 				return (-1);
 			count += j;
 		}
 		else
 		{
-			ft_putchar(format[i++]);
-			count++;
+			ft_putstr(&format[i]);
+			count += ft_strlen(&format[i]);
+			break ;
 		}
 	}
 	return (count);

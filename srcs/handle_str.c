@@ -6,19 +6,11 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 13:53:41 by tjose             #+#    #+#             */
-/*   Updated: 2017/02/06 13:23:59 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/08 16:31:55 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void	adjust_smods(t_mods *mods)
-{
-	mods->flags.show_sign = 0;
-	mods->flags.show_space = 0;
-	mods->flags.hash = 0;
-	mods->length = 0;
-}
 
 static char	*adjust_mbstr(char *str, int precision)
 {
@@ -52,7 +44,6 @@ static char	*adjust_str(t_mods *mods, char *old_str)
 		while (++i < mods->precision)
 			new_str[i] = old_str[i];
 		new_str[i] = '\0';
-		free(old_str);
 		new_str = adjust_mbstr(new_str, mods->precision);
 		mods->precision = -1;
 		return (new_str);
@@ -63,20 +54,27 @@ static char	*adjust_str(t_mods *mods, char *old_str)
 
 static char	*get_new_str(va_list tags, t_mods *mods)
 {
-	wchar_t	*old_str;
+	wchar_t	*old_wstr;
+	char	*old_str;
 	char	*new_str;
 
-	old_str = va_arg(tags, wchar_t*);
-	if (old_str == NULL)
-		new_str = ft_strdup("(null)");
+	if (mods->length == l)
+	{
+		if ((old_wstr = va_arg(tags, wchar_t*)) == NULL)
+			new_str = ft_strdup("(null)");
+		else
+		{
+			if (!(new_str = malloc(sizeof(char) * ft_wcslen(old_wstr) + 1)))
+				return (NULL);
+			ft_wcstombs(new_str, old_wstr, ft_wcslen(old_wstr) + 1);
+		}
+	}
 	else
 	{
-		if (!(new_str = malloc(sizeof(char) * ft_wcslen(old_str) + 1)))
-			return (NULL);
-		if (mods->length == l)
-			ft_wcstombs(new_str, old_str, ft_wcslen(old_str) + 1);
+		if ((old_str = va_arg(tags, char*)) == NULL)
+			new_str = ft_strdup("(null)");
 		else
-			ft_strcpy(new_str, (char*)old_str);
+			new_str = ft_strdup(old_str);
 	}
 	if (!(new_str = adjust_str(mods, new_str)))
 		return (NULL);
@@ -91,7 +89,10 @@ int			handle_str(va_list tags, t_mods *mods)
 
 	if (!(new_str = get_new_str(tags, mods)))
 		return (-1);
-	adjust_smods(mods);
+	mods->flags.show_sign = 0;
+	mods->flags.show_space = 0;
+	mods->flags.hash = 0;
+	mods->length = 0;
 	size = mods->width < ft_strlen(new_str) ? ft_strlen(new_str) : mods->width;
 	if (!(ans = malloc(sizeof(char) * size + 1)))
 		return (-1);

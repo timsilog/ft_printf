@@ -6,7 +6,7 @@
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 11:36:56 by tjose             #+#    #+#             */
-/*   Updated: 2017/01/16 15:48:39 by tjose            ###   ########.fr       */
+/*   Updated: 2017/02/08 16:47:57 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@ void	ft_putstr(char const *s)
 {
 	if (!s)
 		return ;
-	while (*s)
-		ft_putchar(*s++);
+	write(1, s, ft_strlen(s));
 }
